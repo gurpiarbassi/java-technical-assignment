@@ -13,20 +13,21 @@ class WeighedProductTest {
 
     @ParameterizedTest
     @MethodSource
-    void itemFromWeighedProductHasExpectedUnitPriceAndSku(String sku, String pricePerKilo, String weightInKilos, String expectedPrice) {
-        final WeighedProduct weighedProduct = new WeighedProduct(sku, new BigDecimal(pricePerKilo));
+    void itemFromWeighedProductHasExpectedProductSpecifics(String sku, String category, String pricePerKilo, String weightInKilos, String expectedPrice) {
+        final WeighedProduct weighedProduct = new WeighedProduct(sku, new BigDecimal(pricePerKilo), category);
         final Item weighedItem = weighedProduct.weighing(new BigDecimal(weightInKilos));
         assertEquals(new BigDecimal(expectedPrice), weighedItem.price());
         assertEquals(sku, weighedItem.sku());
+        assertEquals(category, weighedItem.category());
 
     }
 
-    static Stream<Arguments> itemFromWeighedProductHasExpectedUnitPriceAndSku() {
+    static Stream<Arguments> itemFromWeighedProductHasExpectedProductSpecifics() {
         return Stream.of(
-                Arguments.of("mySku1", "100.00", "1.00", "100.00"),
-                Arguments.of("mySku2", "100.00", "0.33333", "33.33"),
-                Arguments.of("mySku3", "100.00", "0.33335", "33.34"),
-                Arguments.of("mySku4", "100.00", "0", "0.00")
+                Arguments.of("mySku1", "cat1", "100.00", "1.00", "100.00"),
+                Arguments.of("mySku2", "cat2","100.00", "0.33333", "33.33"),
+                Arguments.of("mySku3", "cat3", "100.00", "0.33335", "33.34"),
+                Arguments.of("mySku4", "cat4", "100.00", "0", "0.00")
         );
     }
 

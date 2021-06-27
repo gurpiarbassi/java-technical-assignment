@@ -11,13 +11,17 @@ class ProductTest {
     @Test
     void singleItemHasExpectedUnitPriceFromProduct() {
         final BigDecimal price = new BigDecimal("2.49");
-        assertEquals(price, new Product("foo", price).oneOf().price());
+        assertEquals(price, new Product("foo", price, "bar").oneOf().price());
     }
 
     @Test
-    void singleItemHasExpectedSkuFromProduct() {
+    void singleItemHasExpectedSkuAndCategoryFromProduct() {
         final String sku = "foo";
+        final String category = "bar";
         final BigDecimal price = new BigDecimal("2.49");
-        assertEquals(sku, new Product(sku, price).oneOf().sku());
+        Item item = new Product(sku, price, category).oneOf();
+
+        assertEquals(item.sku(), sku);
+        assertEquals(item.category(), category);
     }
 }

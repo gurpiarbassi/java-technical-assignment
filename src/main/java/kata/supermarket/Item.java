@@ -6,4 +6,6 @@ public interface Item {
     BigDecimal price();
 
     String sku();
+
+    String category();
 }

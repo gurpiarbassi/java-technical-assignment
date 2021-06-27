@@ -20,4 +20,9 @@ public class ItemByWeight implements Item {
     public String sku() {
         return product.sku();
     }
+
+    @Override
+    public String category() {
+        return product.category();
+    }
 }

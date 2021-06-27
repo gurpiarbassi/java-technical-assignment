@@ -8,9 +8,12 @@ public class Product {
 
     private final String sku;
 
-    public Product(String sku, final BigDecimal pricePerUnit) {
+    private final String category;
+
+    public Product(String sku, final BigDecimal pricePerUnit, String category) {
         this.pricePerUnit = pricePerUnit;
         this.sku = sku;
+        this.category = category;
     }
 
     BigDecimal pricePerUnit() {
@@ -20,6 +23,10 @@ public class Product {
 
     String sku() {
         return sku;
+    }
+
+    String category() {
+        return category;
     }
 
     public Item oneOf() {

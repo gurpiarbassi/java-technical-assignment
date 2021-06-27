@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Stream;
 
+
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BasketTest {
@@ -29,9 +31,19 @@ class BasketTest {
                 aSingleItemPricedPerUnit(),
                 multipleItemsPricedPerUnit(),
                 aSingleItemPricedByWeight(),
-                multipleItemsPricedByWeight()
+                multipleItemsPricedByWeight(),
+                twoPintsOfMilkQualifyingForBuyOneGetOneFree()
         );
     }
+
+
+    /**
+     * Buy one, get one free
+     * Buy two items for £1
+     * Buy three items for the price of two
+     * Buy one kilo of vegetables for half price
+     * @return
+     */
 
     private static Arguments aSingleItemPricedByWeight() {
         return Arguments.of("a single weighed item", "1.25", Collections.singleton(twoFiftyGramsOfAmericanSweets()));
@@ -39,13 +51,13 @@ class BasketTest {
 
     private static Arguments multipleItemsPricedByWeight() {
         return Arguments.of("multiple weighed items", "1.85",
-                Arrays.asList(twoFiftyGramsOfAmericanSweets(), twoHundredGramsOfPickAndMix())
+                asList(twoFiftyGramsOfAmericanSweets(), twoHundredGramsOfPickAndMix())
         );
     }
 
     private static Arguments multipleItemsPricedPerUnit() {
         return Arguments.of("multiple items priced per unit", "2.04",
-                Arrays.asList(aPackOfDigestives(), aPintOfMilk()));
+                asList(aPackOfDigestives(), aPintOfMilk()));
     }
 
     private static Arguments aSingleItemPricedPerUnit() {
@@ -78,5 +90,9 @@ class BasketTest {
 
     private static Item twoHundredGramsOfPickAndMix() {
         return aKiloOfPickAndMix().weighing(new BigDecimal(".2"));
+    }
+
+    private static Arguments twoPintsOfMilkQualifyingForBuyOneGetOneFree() {
+        return Arguments.of("Two pints of milk qualifying for buy one get one free", "0.49", asList(aPintOfMilk(), aPintOfMilk()));
     }
 }

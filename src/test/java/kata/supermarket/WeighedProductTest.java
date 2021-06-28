@@ -1,13 +1,14 @@
 package kata.supermarket;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 
 import java.math.BigDecimal;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class WeighedProductTest {
 
@@ -16,9 +17,9 @@ class WeighedProductTest {
     void itemFromWeighedProductHasExpectedProductSpecifics(String sku, String category, String pricePerKilo, String weightInKilos, String expectedPrice) {
         final WeighedProduct weighedProduct = new WeighedProduct(sku, new BigDecimal(pricePerKilo), category);
         final Item weighedItem = weighedProduct.weighing(new BigDecimal(weightInKilos));
-        assertEquals(new BigDecimal(expectedPrice), weighedItem.price());
-        assertEquals(sku, weighedItem.sku());
-        assertEquals(category, weighedItem.category());
+        assertThat(weighedItem.price(), is(new BigDecimal(expectedPrice)));
+        assertThat(weighedItem.sku(), is(sku));
+        assertThat(weighedItem.category(), is(category));
 
     }
 

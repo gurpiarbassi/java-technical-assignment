@@ -1,17 +1,18 @@
 package kata.supermarket;
 
-import org.junit.jupiter.api.Test;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 
 import java.math.BigDecimal;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 class ProductTest {
 
     @Test
     void singleItemHasExpectedUnitPriceFromProduct() {
         final BigDecimal price = new BigDecimal("2.49");
-        assertEquals(price, new Product("foo", price, "bar").oneOf().price());
+        assertThat(new Product("foo", price, "bar").oneOf().price(), is(price));
     }
 
     @Test
@@ -21,7 +22,7 @@ class ProductTest {
         final BigDecimal price = new BigDecimal("2.49");
         Item item = new Product(sku, price, category).oneOf();
 
-        assertEquals(item.sku(), sku);
-        assertEquals(item.category(), category);
+        assertThat(item.sku(), is(sku));
+        assertThat(item.category(), is(category));
     }
 }

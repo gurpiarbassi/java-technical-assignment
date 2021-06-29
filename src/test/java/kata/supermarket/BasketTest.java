@@ -12,6 +12,8 @@ import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
 import java.util.stream.Stream;
+import kata.supermarket.discount.DiscountEngine;
+import kata.supermarket.discount.PricingDiscount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,8 +24,11 @@ class BasketTest {
     @DisplayName("basket provides its total value when containing...")
     @MethodSource
     @ParameterizedTest(name = "{0}")
-    void basketProvidesTotalValue(String description, String expectedTotal, Iterable<Item> items) {
-        final Basket basket = new Basket();
+    void basketProvidesTotalValue(String description, String expectedTotal, Iterable<Item> items, Iterable<PricingDiscount> discounts) {
+        final DiscountEngine discountEngine = new DiscountEngine();
+        final Basket basket = new Basket(discountEngine);
+        discounts.forEach(discountEngine::addDiscount);
+
         items.forEach(basket::add);
         assertThat(basket.total(), is(new BigDecimal(expectedTotal)));
     }

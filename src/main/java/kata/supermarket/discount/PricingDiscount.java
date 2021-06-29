@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import kata.supermarket.Item;
 
-interface PricingDiscount {
+public interface PricingDiscount {
 
   BigDecimal getDiscount(List<Item> items);
 }

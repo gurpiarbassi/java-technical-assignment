@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 import java.util.List;
 import kata.supermarket.Item;
 
-class BuyOneGetOneFree implements PricingDiscount {
+public class BuyOneGetOneFree implements PricingDiscount {
 
   private final String sku;
 
-  BuyOneGetOneFree(String sku) {
+  public BuyOneGetOneFree(String sku) {
     this.sku = sku;
   }
 
